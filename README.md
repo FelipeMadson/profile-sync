@@ -1,20 +1,20 @@
-# Olá, eu sou o Felipe Madson! 👋
+# Olá, eu sou o Felipe Madson
 
 > **Estudante de Tecnologia em Sistemas para Internet (TSI)**  
 > Foco: **Engenharia de Software Web, Arquitetura Local-First e Ferramentas para Desenvolvedores**  
 > GitHub: [@FelipeMadson](https://github.com/FelipeMadson)
 
 [![GitHub followers](https://img.shields.io/github/followers/FelipeMadson?label=Seguidores&style=social)](https://github.com/FelipeMadson)
-[![Tests](https://img.shields.io/badge/Testes%20Automatizados-52%20Passing-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/Testes%20Automatizados-59%20Passing-brightgreen.svg)]()
 [![Zero Dependencies](https://img.shields.io/badge/Runtime%20Dependencies-0%20(Native%20Node.js)-blue.svg)]()
 [![Security](https://img.shields.io/badge/Vulnerabilidades-0%20(npm%20audit)-success.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## 🚀 Trilogia de Engenharia de Software (Portfólio TSI)
+## Projetos em Produção (Portfólio TSI)
 
-Uma série de projetos concebidos para resolver gargalos reais no dia a dia de desenvolvedores web e internet, com **código 100% determinístico, zero dependências externas em runtime e zero vulnerabilidades de segurança**:
+Projetos concebidos para resolver gargalos reais no dia a dia de desenvolvedores web e internet, com **código 100% determinístico, zero dependências externas em runtime e zero vulnerabilidades de segurança**:
 
 ### 1. [EnvDoctor](https://github.com/FelipeMadson/envdoctor)
 CLI determinística de diagnóstico e auditoria de ambientes dev locais com garantia comprovada de zero vazamento de segredos .env.
@@ -48,7 +48,17 @@ Plataforma fullstack de demandas técnicas com algoritmo gravitacional de decaim
 
 ---
 
-## 🛠️ Stack Tecnológica & Princípios de Engenharia
+### 4. [Model-Based Design Platform for Engineers](https://github.com/FelipeMadson/model-based-design-platform-for-engineers)
+Uma plataforma de código aberto e acessível para model-based design, com foco em simplicidade e colaboração.
+
+* **Testes:** 7 testes automatizados (`node:test`)
+* Uma plataforma de código aberto e acessível para model-based design, com foco em simplicidade e colaboração.
+* Zero dependências externas de runtime — 100% Node.js nativo
+* Suíte de testes automatizados com node:test (7 testes aprovados)
+
+---
+
+## Stack Tecnológica & Princípios de Engenharia
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -68,7 +78,7 @@ Plataforma fullstack de demandas técnicas com algoritmo gravitacional de decaim
 
 ---
 
-## 📬 Conecte-se Comigo
+## Conexão & Colaboração
 
-* 🌐 **GitHub:** [https://github.com/FelipeMadson](https://github.com/FelipeMadson)
-* 💼 **Projetos Abertos para Contribuição:** Sinta-se à vontade para abrir uma issue ou enviar um pull request!
+* **GitHub:** [https://github.com/FelipeMadson](https://github.com/FelipeMadson)
+* **Projetos Abertos para Contribuição:** Sinta-se à vontade para abrir uma issue ou propor melhorias via pull request.
