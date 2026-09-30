@@ -1,0 +1,46 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "Profile Sync SBOM",
+  "documentNamespace": "https://github.com/FelipeMadson/profile-sync/spdxdocs/profile-sync-1.0.0-fb4877ba-94ae-456e-99fc-5895961aef88",
+  "creationInfo": {
+    "created": "2026-09-30T15:18:13.984Z",
+    "creators": [
+      "Person: Felipe Madison (@FelipeMadson)",
+      "Organization: Autonomous Portfolio Engine — Staff Engineering Grade",
+      "Tool: SecurityCiGenerator-1.0.0"
+    ],
+    "licenseListVersion": "3.21"
+  },
+  "packages": [
+    {
+      "name": "profile-sync",
+      "SPDXID": "SPDXRef-Package-profile-sync",
+      "versionInfo": "1.0.0",
+      "packageFileName": "profile-sync-1.0.0.tar.gz",
+      "packageSupplier": "Person: Felipe Madison (https://github.com/FelipeMadson)",
+      "originator": "Person: Felipe Madison (https://github.com/FelipeMadson)",
+      "downloadLocation": "git+https://github.com/FelipeMadson/profile-sync.git@v1.0.0",
+      "filesAnalyzed": false,
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a29c972e41676edd8a213f8f277a7679852d2b0bd3377c1d8b6f391c0c7617e3"
+        }
+      ],
+      "homepage": "https://github.com/FelipeMadson/profile-sync",
+      "concludedLicense": "MIT",
+      "declaredLicense": "MIT",
+      "copyrightText": "Copyright (c) 2026 Felipe Madison (@FelipeMadson)",
+      "description": "Enterprise-grade production release for Profile Sync, engineered by Felipe Madison."
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relatedSpdxElement": "SPDXRef-Package-profile-sync",
+      "relationshipType": "DESCRIBES"
+    }
+  ]
+}
