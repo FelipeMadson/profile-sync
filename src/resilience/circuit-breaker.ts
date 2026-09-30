@@ -1,98 +1,74 @@
-// =========================================================================
-// Enterprise Circuit Breaker Pattern (Sliding Window)
-// Author: Felipe Madison (@FelipeMadson)
-// =========================================================================
+export class TokenBucketRateLimiter {
+  private capacity: number;
+  private tokens: number;
+  private refillRatePerSec: number;
+  private lastRefill: number;
 
-export type CircuitState = "CLOSED" | "OPEN" | "HALF_OPEN";
+  constructor(capacity = 50, refillRatePerSec = 10) {
+    this.capacity = capacity;
+    this.tokens = capacity;
+    this.refillRatePerSec = refillRatePerSec;
+    this.lastRefill = Date.now();
+  }
 
-export interface CircuitBreakerOptions {
-  failureThresholdPercentage?: number; // Ex: 50%
-  minimumRequests?: number;            // Ex: 5 requisições antes de avaliar
-  resetTimeoutMs?: number;             // Ex: 5000ms antes de tentar HALF_OPEN
-  windowSize?: number;                 // Ex: 10 amostras deslizantes
+  public tryAcquire(cost = 1): boolean {
+    this.refill();
+    if (this.tokens >= cost) {
+      this.tokens -= cost;
+      return true;
+    }
+    return false;
+  }
+
+  public getAvailableTokens(): number {
+    this.refill();
+    return Math.floor(this.tokens);
+  }
+
+  private refill(): void {
+    const now = Date.now();
+    const elapsedSeconds = (now - this.lastRefill) / 1000;
+    if (elapsedSeconds > 0) {
+      this.tokens = Math.min(this.capacity, this.tokens + elapsedSeconds * this.refillRatePerSec);
+      this.lastRefill = now;
+    }
+  }
 }
 
 export class CircuitBreaker {
-  private state: CircuitState = "CLOSED";
-  private window: boolean[] = []; // true = sucesso, false = falha
-  private nextAttemptTime: number = 0;
-  private readonly threshold: number;
-  private readonly minRequests: number;
-  private readonly resetTimeoutMs: number;
-  private readonly windowSize: number;
+  private failureCount = 0;
+  private threshold: number;
+  private resetTimeoutMs: number;
+  private state: "CLOSED" | "OPEN" | "HALF_OPEN" = "CLOSED";
+  private nextAttempt: number = Date.now();
 
-  constructor(options: CircuitBreakerOptions = {}) {
-    this.threshold = options.failureThresholdPercentage || 50;
-    this.minRequests = options.minimumRequests || 5;
-    this.resetTimeoutMs = options.resetTimeoutMs || 5000;
-    this.windowSize = options.windowSize || 10;
+  constructor(threshold = 3, resetTimeoutMs = 1000) {
+    this.threshold = threshold;
+    this.resetTimeoutMs = resetTimeoutMs;
   }
 
-  public getState(): CircuitState {
-    if (this.state === "OPEN" && Date.now() >= this.nextAttemptTime) {
+  public getState(): "CLOSED" | "OPEN" | "HALF_OPEN" {
+    if (this.state === "OPEN" && Date.now() >= this.nextAttempt) {
       this.state = "HALF_OPEN";
     }
     return this.state;
   }
 
-  public async execute<T>(action: () => Promise<T>, fallback?: () => Promise<T>): Promise<T> {
-    const currentState = this.getState();
-
-    if (currentState === "OPEN") {
-      if (fallback) return fallback();
-      throw new Error("CircuitBreaker: Circuito OPEN. Requisição rejeitada preventivamente.");
-    }
-
-    try {
-      const result = await action();
-      this.recordSuccess();
-      return result;
-    } catch (err) {
-      this.recordFailure();
-      if (fallback) return fallback();
-      throw err;
-    }
-  }
-
-  private recordSuccess(): void {
-    if (this.state === "HALF_OPEN") {
-      this.state = "CLOSED";
-      this.window = [];
-    }
-    this.pushSample(true);
-  }
-
-  private recordFailure(): void {
-    this.pushSample(false);
-    if (this.state === "HALF_OPEN") {
-      this.trip();
-      return;
-    }
-
-    if (this.window.length >= this.minRequests) {
-      const failures = this.window.filter(s => !s).length;
-      const failureRate = (failures / this.window.length) * 100;
-      if (failureRate >= this.threshold) {
-        this.trip();
-      }
-    }
-  }
-
-  private pushSample(success: boolean): void {
-    this.window.push(success);
-    if (this.window.length > this.windowSize) {
-      this.window.shift();
-    }
-  }
-
-  private trip(): void {
-    this.state = "OPEN";
-    this.nextAttemptTime = Date.now() + this.resetTimeoutMs;
-  }
-
-  public reset(): void {
+  public recordSuccess(): void {
+    this.failureCount = 0;
     this.state = "CLOSED";
-    this.window = [];
-    this.nextAttemptTime = 0;
+  }
+
+  public recordFailure(): void {
+    this.failureCount++;
+    if (this.failureCount >= this.threshold) {
+      this.state = "OPEN";
+      this.nextAttempt = Date.now() + this.resetTimeoutMs;
+    }
+  }
+
+  public allowExecution(): boolean {
+    const s = this.getState();
+    return s === "CLOSED" || s === "HALF_OPEN";
   }
 }

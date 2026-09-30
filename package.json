@@ -1,11 +1,12 @@
 {
-  "name": "profile-sync",
+  "name": "@felipemadson/profile-sync",
   "version": "1.1.0",
   "description": "Manual maintenance of developer portfolios and profile READMEs leads to stale metrics, missing project highlights, and outdated statistics.",
   "type": "module",
   "main": "src/index.ts",
   "bin": {
-    "profile-sync": "src/cli/cli.ts"
+    "profile-sync": "./bin/cli.js",
+    "@felipemadson/profile-sync": "./bin/cli.js"
   },
   "scripts": {
     "start": "node --experimental-strip-types src/index.ts",
