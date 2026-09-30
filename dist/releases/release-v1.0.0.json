@@ -2,9 +2,9 @@
   "slug": "profile-sync",
   "version": "v1.0.0",
   "archiveFilename": "profile-sync-v1.0.0.tar.gz",
-  "archiveSizeBytes": 31391,
-  "sha256": "30e1e8a446909544501b941458288f0a6bd3e8cc6471a54f352640e384aa095e",
-  "filesIncluded": 36,
-  "createdAt": "2026-09-30T15:18:13.993Z",
+  "archiveSizeBytes": 33758,
+  "sha256": "16eba52713d3e4305a17ef0976d7786ca152dc22bc7dae87b7d4e266cf81208c",
+  "filesIncluded": 38,
+  "createdAt": "2026-09-30T15:42:25.104Z",
   "author": "Felipe Madison (@FelipeMadson)"
 }
